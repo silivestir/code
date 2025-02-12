@@ -3,11 +3,16 @@ const http = require('http');
 const socketIo = require('socket.io');
 const fs = require('fs');
 const { exec } = require('child_process');
-
+const cors = require('cors');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
-
+// Enable CORS
+app.use(cors({
+  origin: 'https://codenaassey.onrender.com',  // Allow your frontend domain
+  methods: ['GET', 'POST'],  // Allow methods
+  allowedHeaders: ['Content-Type']  // Allow headers
+}));
 let currentCode = ''; // Store current code
 //To holding users information 
 const socketsStatus = {};
